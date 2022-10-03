@@ -1,0 +1,66 @@
+<div class="p-3 bg-dark text-white">
+
+<form #employeeForm="ngForm" (ngSubmit)="getEmployeeData(employeeForm.value)">
+    <div class="form-group" style="margin: 1%; width: 20%;">
+        <input type="text" ngModel name="name" placeholder="Employee Name" class="form-control">
+        <br>
+
+        <input type="text" ngModel name="surname" placeholder="Employee Surname" class="form-control">
+        <br>
+
+        <input type="text" ngModel name="email" placeholder="Employee email" class="form-control">
+        <br>
+        <input type="date" ngModel name="dob" class="form-control">
+        <br>
+        <input type="text" ngModel name="nationality" placeholder="Employee nationality"  class="form-control">
+        <br>
+        <input type="text" ngModel name="id_number" placeholder="Employee ID Number" class="form-control">
+        <br>
+    </div>
+    
+    <div class="form-group" style="margin: 0 0 0 1%; width: 20%;" >
+    <input type="text" ngModel name="position" placeholder="Employee position" class="form-control">
+    <br>
+  
+    <input type="text" ngModel name="salary" placeholder="Employee salary" class="form-control">
+    <br>
+  
+    <input type="text" ngModel name="currency" placeholder="Employee currency" class="form-control">
+    <br>
+  
+    <input type="text" ngModel name="dwellingType" placeholder="Employee dwellingType" class="form-control">
+    <br>
+  
+    <input type="text" ngModel name="homeNumber" placeholder="Employee homeNumber" class="form-control">
+    <br>
+  
+    <input type="text" ngModel name="streetName" placeholder="Employee streetName" class="form-control">
+    <br>
+  
+    <input type="text" ngModel name="poBox" placeholder="Employee poBox" class="form-control">
+    <br>
+
+   
+  
+    <div class="form-group">
+        <label for="locationType">Location Type</label>
+        <select id="locationType" class="form-control" ngModel name="locationType">
+          <option selected>Office</option>
+          <option>Remote</option>
+          <option>Hybrid</option>
+        </select>
+      </div>
+      <br>
+    <input type="text" ngModel name="buildingNumber" placeholder="Building Number" class="form-control">
+    <br>
+  
+    <input type="text" ngModel name="work_streetName" placeholder="Work Street Name" class="form-control">
+    <br>
+  
+    <input type="text" ngModel name="work_poBox" placeholder="Work PO Box" class="form-control">
+    <br>
+</div>
+    <button class="btn btn-primary" style="margin: 1%; width: 20%;">Add New Employee</button>
+  </form>
+    
+</div>
