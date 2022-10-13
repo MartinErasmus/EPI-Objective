@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup,Validator, Validators } from '@angular/forms';
@@ -6,6 +7,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { CountryListComponent } from '../country-list/country-list.component';
 import { EmployeeAPIService } from '../employee-api.service';
 import { employee } from '../entities/employee';
+import {EmployeeFunctionsService} from '../services/employee-functions.service'
 
 
 
@@ -26,6 +28,33 @@ export class EmployeeFormComponent implements OnInit {
   reactiveForm: FormGroup;
   searchForm:FormGroup;
   public Employees: employee[]=[];
+  datepipe: DatePipe = new DatePipe('en-US')
+
+  updatedCountry:string;
+  getupdateCountry():string{
+    return this.updatedCountry;
+  }
+  updateCountry(address:string){
+    this.updatedCountry=address;
+  }
+
+  updatedWorkCountry:string;
+  getupdateWorkCountry():string{
+    return this.updatedWorkCountry;
+  }
+ updateWorkCountry(address:string){
+    this.updatedWorkCountry=address;
+  }
+
+  updatedCurrency:string;
+  getupdatedCurrency():string{
+    return this.updatedCurrency;
+  }
+  updateCurrency(currency:string){
+    this.updatedCurrency=currency;
+  }
+
+
 
   keyPressNumbers(event) {
     var charCode = (event.which) ? event.which : event.keyCode;
@@ -50,10 +79,31 @@ export class EmployeeFormComponent implements OnInit {
   }
   constructor(private employeeAPI: EmployeeAPIService) { }
 
+  clickDeleteMethod() {
+    if(confirm("Confirm delete")) {
+      this.getRemoveEmployee();
+    }
+  }
+  clickUpdateMethod() {
+    if(confirm("Confirm delete")) {
+      this.getRemoveEmployee();
+    }
+  }
+
+  clickAddMethod() {
+    if(confirm("Confirm delete")) {
+      this.getRemoveEmployee();
+    }
+  }
+
+
+
   getUpdateEmployee(data:any){
     this.Employees.forEach(employee => {
       if (employee.id_number==this.reactiveForm.get('id_number')?.value) {
         this.employeeAPI.updateEmployee(data);
+        window.location.reload();
+
       }
     });
   }
@@ -61,8 +111,7 @@ export class EmployeeFormComponent implements OnInit {
 
     if(this.reactiveForm.valid==true){
       this.employeeAPI.saveEmployee(data);
-      alert(Headers);
-      this.reactiveForm.reset();
+      window.location.reload();
     }else{
       console.log("Please check that all Information is valid")
     }
@@ -74,25 +123,34 @@ export class EmployeeFormComponent implements OnInit {
         this.employeeAPI.removeEmployee(parseInt(employee.id));
       }
     });
+    window.location.reload();
 
   }
 
+
+
+
   getSearchEmployee(data:string){
+
       this.Employees.forEach(employee => {
         if (employee.id_number==this.searchForm.get('id_num')?.value) {
-           console.log(employee.homeAddress_id.country);
-          //this.countryListComponent.updateCountry(employee.homeAddress_id.country)
+          this.updateCountry(employee.homeAddress_id.country);
+          this.updateWorkCountry(employee.work_Address.country);
+          this.updateCurrency(employee.job_info.currency);
+          let formattedDate = this.datepipe.transform(employee.dob, 'YYYY-MM-dd')
+
           this.reactiveForm.patchValue({
             name: employee.name,
             surname: employee.surname,
             email: employee.email,
-            dob:employee.dob,
+            dob:formattedDate,
             nationality: employee.nationality,
             id_number: employee.id_number,
             position:employee.job_info.position,
             salary: employee.job_info.salary,
             currency: employee.job_info.currency,
             dwellingType: employee.homeAddress_id.dwellingType,
+     
             country:employee.homeAddress_id.country,
             city:employee.homeAddress_id.city,
             province:employee.homeAddress_id.province,
@@ -105,6 +163,7 @@ export class EmployeeFormComponent implements OnInit {
             work_address: employee.work_Address.address,
             work_poBox: employee.work_Address.poBox,
           })
+          
    
           }
       });

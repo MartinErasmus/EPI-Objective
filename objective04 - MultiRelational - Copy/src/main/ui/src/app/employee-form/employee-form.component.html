@@ -22,7 +22,7 @@
 
     
 
-        <input   ngModel   type="text" placeholder="Employee Name" class="form-control" formControlName="name">
+        <input   ngModel #name  type="text" placeholder="Employee Name" class="form-control" formControlName="name">
         <br>
 
         
@@ -50,7 +50,7 @@
     <br>
          <ul class="list-group list-group-horizontal-sm">
           <li class="list-group-item" id="currency">
-            <currency-list  id="currency"  class="form-control" formControlName="currency" ngDefaultControl></currency-list>
+            <currency-list  [currency]="getupdatedCurrency()" id="currency"  class="form-control" formControlName="currency" ngDefaultControl></currency-list>
   
           </li>
           <li class="list-group-item"><input  type="number" min="0" placeholder="Employee salary" class="form-control" formControlName="salary"> </li>
@@ -67,8 +67,7 @@
       </select>
     </div>
     <br>
-
-    <country-list [country]="'test'" formControlName="country" class="form-control" [formGroup]="reactiveForm" ngDefaultControl ></country-list>
+    <country-list [country]="getupdateCountry()"  formControlName="country" class="form-control" [formGroup]="reactiveForm" ngDefaultControl ></country-list>
     <br>
   
 
@@ -98,7 +97,7 @@
       </div>
       <br>
 
-      <country-list formControlName="work_country" class="form-control" [formGroup]="reactiveForm" ngDefaultControl ></country-list> 
+      <country-list [country]="getupdateWorkCountry()" formControlName="work_country" class="form-control" [formGroup]="reactiveForm" ngDefaultControl ></country-list> 
 
     <br>
   
@@ -116,9 +115,9 @@
     <input type="text"  placeholder="Work PO Box" class="form-control" formControlName="work_poBox">
     <br>
     <button class="btn btn-primary" [disabled]="reactiveForm.invalid">Add New Employee</button>
-    <form  #deleteForm="ngForm" (ngSubmit)="getRemoveEmployee()">
+    <form  #deleteForm="ngForm" >
       <br>
-      <button class="btn btn-primary" >Remove Employee</button>
+      <button class="btn btn-primary" (click)="clickDeleteMethod()">Remove Employee</button>
     </form>
     <form  #updateForm="ngForm" (ngSubmit)="getUpdateEmployee(employeeForm.value)" >
       <br>

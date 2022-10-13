@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'currency-list',
@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class CurrencyListComponent implements OnInit {
 
   constructor() { }
+
+  @Input()
+  currency:string;
 
   ngOnInit(): void {
   }
