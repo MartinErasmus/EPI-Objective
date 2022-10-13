@@ -26,9 +26,15 @@ public class Employee implements Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "employee_id_Sequence")
-    @SequenceGenerator(name = "employee_id_Sequence", sequenceName = "employee_id_Sequence",allocationSize = 1)
+
+   // @GeneratedValue(strategy=GenerationType.AUTO, generator = "employee_id_Sequence")
+   // @SequenceGenerator(name = "employee_id_Sequence", sequenceName = "employee_id_Sequence",allocationSize = 1)
     private long id;
+
+//    public void setId(long id) {
+//        this.id = id;
+//    }
+
     private  String name;
 
     public String getSurname() {

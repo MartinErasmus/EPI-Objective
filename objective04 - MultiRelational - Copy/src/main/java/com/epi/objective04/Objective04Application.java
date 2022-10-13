@@ -23,6 +23,8 @@ public class Objective04Application implements CommandLineRunner {
 		SpringApplication.run(Objective04Application.class, args);
 	}
 
+
+
 	@Bean
 	public CorsFilter corsFilter() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -41,29 +43,6 @@ public class Objective04Application implements CommandLineRunner {
 
 
 	public void run(String... args) throws Exception {
-//		Employee employee = new Employee();
-//		employee.setEmail("testingOneToOneV15@gmail.com");
-//		employee.setName("testingOneToOneV15");
-//
-//		Job_Info job_info = new Job_Info();
-//		job_info.setPosition("Guy");
-//		job_info.setCurrency("R");
-//		job_info.setSalary("20000");
-//		employee.setJob_info(job_info);
-//		job_info.setEmployee(employee);
-//
-//
-//		Home_Address home_address = new Home_Address();
-//		home_address.setHomeNumber(15);
-//		home_address.setDwellingType("Place");
-//		home_address.setStreetName("Fourth Rd");
-//		home_address.setPoBox("1619");
-//		home_address.setEmployee(employee);
-//		employee.setHomeAddress_id(home_address);
-//
-//
-//		job_info.setEmployee(employee);
-//
-//		employeeRepo.save(employee);
+
 	}
 }

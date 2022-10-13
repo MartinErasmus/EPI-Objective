@@ -9,16 +9,12 @@ import javax.persistence.*;
 public class Home_Address {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "home_id_Sequence")
-    @SequenceGenerator(name = "home_id_Sequence", sequenceName = "home_id_Sequence",allocationSize = 1)
+   // @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "home_id_Sequence")
+    //@SequenceGenerator(name = "home_id_Sequence", sequenceName = "home_id_Sequence",allocationSize = 1)
     private long id;
 
-    public Home_Address(String dwellingType, int homeNumber, String streetName, String poBox) {
-        this.dwellingType = dwellingType;
-        this.homeNumber = homeNumber;
-        this.streetName = streetName;
-        this.poBox = poBox;
-    }
+
+
 
     public Home_Address() {
 
@@ -40,22 +36,6 @@ public class Home_Address {
         this.dwellingType = dwellingType;
     }
 
-    public int getHomeNumber() {
-        return homeNumber;
-    }
-
-    public void setHomeNumber(int homeNumber) {
-        this.homeNumber = homeNumber;
-    }
-
-    public String getStreetName() {
-        return streetName;
-    }
-
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
-    }
-
     public String getPoBox() {
         return poBox;
     }
@@ -65,9 +45,56 @@ public class Home_Address {
     }
 
     private String dwellingType;
-    private int homeNumber;
-    private String streetName;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    private String city;
+    private String province;
+    private String country;
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+
     private String poBox;
+
+    public Home_Address(String dwellingType, String city, String province, String country, String address, String poBox, Employee employee) {
+        this.dwellingType = dwellingType;
+        this.city = city;
+        this.province = province;
+        this.country = country;
+        this.address = address;
+        this.poBox = poBox;
+        this.employee = employee;
+    }
 
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "homeAddress_id")
     @JsonBackReference

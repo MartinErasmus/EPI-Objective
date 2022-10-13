@@ -4,10 +4,9 @@ import com.epi.objective04.entity.Employee;
 import com.epi.objective04.entity.tempData;
 import com.epi.objective04.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "createEmployee",method = RequestMethod.POST)
     public String createEmployee(@RequestBody tempData tempdata){
-        return employeeService.createEmployee(tempdata);
+        return employeeService.saveEmployee(tempdata,false);
     }
 
     @RequestMapping(value = "readEmployee",method = RequestMethod.GET)
@@ -27,14 +26,26 @@ public class EmployeeController {
         return employeeService.readEmployees();
     }
 
+//    @RequestMapping(value = "readEmployeeById",method = RequestMethod.POST)
+//    public Employee readEmployeeById(){
+//        //return employeeService.readEmployeeById();
+//    }
+
+
     @RequestMapping(value = "updateEmployee",method = RequestMethod.PUT)
-    public String updateEmployee(@RequestBody Employee employee){
-        return employeeService.updateEmployee(employee);
+    public String updateEmployee(@RequestBody tempData tempdata){
+        return employeeService.saveEmployee(tempdata,true);
+
     }
 
-    @RequestMapping(value = "deleteEmployee",method = RequestMethod.DELETE)
-    public String deleteEmployee(@RequestBody Long id){
-
-        return employeeService.deleteEmployee(id);
+    @RequestMapping(value="deleteEmployee/{id}",method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
+        employeeService.deleteEmployee(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
+
+//    @RequestMapping(value = "deleteEmployee",method = RequestMethod.DELETE)
+//    public String deleteEmployee(@RequestBody Long id){
+//        return employeeService.deleteEmployee(id);
+//    }
 }

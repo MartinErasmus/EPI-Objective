@@ -8,10 +8,13 @@ import javax.persistence.*;
 @Table (name = "job_info")
 
 public class Job_Info {
+    public void setId(long id) {
+        this.id = id;
+    }
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "jb_id_Sequence")
-    @SequenceGenerator(name = "jb_id_Sequence", sequenceName = "jb_id_Sequence",allocationSize = 1)
+   // @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "jb_id_Sequence")
+    //@SequenceGenerator(name = "jb_id_Sequence", sequenceName = "jb_id_Sequence",allocationSize = 1)
     private long id;
 
     public long getId() {

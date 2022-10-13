@@ -1,0 +1,66 @@
+input.ng-invalid.ng-touched{
+    border: rgb(204, 16, 16) 1px solid;
+}
+
+
+#currency select{
+    width: 100%;
+}
+
+#mainSection{
+    border: 5px solid;
+    border-image: linear-gradient(45deg, rgba(254,254,254,1), rgba(241,54,61,1)) 1;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.main{
+    padding: 5%;
+    background: rgb(254,254,254);
+background: linear-gradient(180deg, rgba(254,254,254,1) 25%, rgba(241,54,61,1) 97%);
+}
+
+input{
+   width:100%;
+}
+
+#frmDiv{
+    padding: 5% 10% 10% 10%
+}
+
+#frmDiv Button{
+    width:100%
+}
+
+#shadowText{
+    text-shadow: -3px -4px 3px rgba(0,0,0,0.80);
+}
+
+#imgDiv{
+padding-bottom:2% ;
+}
+
+#searchDiv{
+
+ 
+    width: 70%;
+    height: 10%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+   
+
+}
+#topDiv{
+    width: 100%;
+}
+#searchDiv input{
+        width: 100%;
+        margin-right:2px ;
+    }
+
+    #searchIcon{
+        margin-right:2px ;
+    }
+
+   

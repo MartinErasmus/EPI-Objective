@@ -1,66 +1,132 @@
-<div class="p-3 bg-dark text-white">
+<section class="main">
+  <div id="imgDiv">
+    <img src="/assets/EPI-USE-logo.png" alt="logo" width="150" height="45">
+  </div>
+  
+<div class="p-3 bg-dark text-white" id="mainSection">
+  
+<form [formGroup]="reactiveForm" #employeeForm="ngForm" (ngSubmit)="getEmployeeData(employeeForm.value)">
+  <p class="h2" id="shadowText">Register New Employee</p>
+  <div class="form-group" id="topDiv">
+    <span 
+    *ngIf="reactiveForm.invalid"
+    style="color: rgb(253, 82, 82)">Please Ensure All Input Fields are filled in Correctly</span>
+    <form [formGroup]="searchForm" id="searchDiv" #search="ngForm" (ngSubmit)="getSearchEmployee(searchForm.value)">
+      <mat-icon id="searchIcon">search</mat-icon>
+      <input (keypress)="keyPressNumbers($event)" minlength="13" maxlength="13" type="text" placeholder="ID" class="form-control" formControlName="id_num">
+      <button class="btn btn-primary">Search</button>
+    </form>
+  </div>  
 
-<form #employeeForm="ngForm" (ngSubmit)="getEmployeeData(employeeForm.value)">
-    <div class="form-group" style="margin: 1%; width: 20%;">
-        <input type="text" ngModel name="name" placeholder="Employee Name" class="form-control">
-        <br>
+  <div class="form-group" id="frmDiv">
 
-        <input type="text" ngModel name="surname" placeholder="Employee Surname" class="form-control">
-        <br>
-
-        <input type="text" ngModel name="email" placeholder="Employee email" class="form-control">
-        <br>
-        <input type="date" ngModel name="dob" class="form-control">
-        <br>
-        <input type="text" ngModel name="nationality" placeholder="Employee nationality"  class="form-control">
-        <br>
-        <input type="text" ngModel name="id_number" placeholder="Employee ID Number" class="form-control">
-        <br>
-    </div>
     
-    <div class="form-group" style="margin: 0 0 0 1%; width: 20%;" >
-    <input type="text" ngModel name="position" placeholder="Employee position" class="form-control">
+
+        <input   ngModel   type="text" placeholder="Employee Name" class="form-control" formControlName="name">
+        <br>
+
+        
+        <input  type="text"  placeholder="Employee Surname" class="form-control" formControlName="surname">
+        <br>
+
+       
+        <input   type="email"  placeholder="Employee Email" class="form-control" formControlName="email">
+        <br>
+
+ 
+
+        <input type="date" min='1900-01-01' max='2005-01-01' class="form-control" formControlName="dob">
+        <br>
+
+        
+        <input  type="text"  placeholder="Employee Nationality"  class="form-control" formControlName="nationality">
+        <br>
+
+       
+        <input  (keypress)="keyPressNumbers($event)" minlength="13" maxlength="13" type="text" placeholder="Employee ID Number" class="form-control" formControlName="id_number">
+        <br>
+      
+        <input type="text" placeholder="Employee position" class="form-control" formControlName="position">
+    <br>
+         <ul class="list-group list-group-horizontal-sm">
+          <li class="list-group-item" id="currency">
+            <currency-list  id="currency"  class="form-control" formControlName="currency" ngDefaultControl></currency-list>
+  
+          </li>
+          <li class="list-group-item"><input  type="number" min="0" placeholder="Employee salary" class="form-control" formControlName="salary"> </li>
+         </ul>
+    <br>
+    <div class="form-group">
+      <label for="locationType">Residential Dwelling Type</label>
+      <select  id="dwellingType" class="form-control" formControlName="dwellingType" >
+        <option>Apartment</option>
+        <option>Flat</option>
+        <option>Farm</option>
+        <option>House</option>
+        <option>Small Holdings</option>
+      </select>
+    </div>
+    <br>
+
+    <country-list [country]="'test'" formControlName="country" class="form-control" [formGroup]="reactiveForm" ngDefaultControl ></country-list>
     <br>
   
-    <input type="text" ngModel name="salary" placeholder="Employee salary" class="form-control">
+
+    <input  type="text"  placeholder="Employee Province" class="form-control" formControlName="province"> 
     <br>
   
-    <input type="text" ngModel name="currency" placeholder="Employee currency" class="form-control">
+    <input  type="text"  placeholder="Employee City" class="form-control" formControlName="city">
     <br>
   
-    <input type="text" ngModel name="dwellingType" placeholder="Employee dwellingType" class="form-control">
+
+    <input  type="text"  placeholder="Employee Address" class="form-control" formControlName="address"> 
     <br>
   
-    <input type="text" ngModel name="homeNumber" placeholder="Employee homeNumber" class="form-control">
-    <br>
-  
-    <input type="text" ngModel name="streetName" placeholder="Employee streetName" class="form-control">
-    <br>
-  
-    <input type="text" ngModel name="poBox" placeholder="Employee poBox" class="form-control">
+    
+    <input  type="text"  placeholder="Employee PO Box" class="form-control" formControlName="poBox">
     <br>
 
    
-  
+    
     <div class="form-group">
         <label for="locationType">Location Type</label>
-        <select id="locationType" class="form-control" ngModel name="locationType">
+        <select  id="locationType" class="form-control" formControlName="locationType">
           <option selected>Office</option>
           <option>Remote</option>
           <option>Hybrid</option>
         </select>
       </div>
       <br>
-    <input type="text" ngModel name="buildingNumber" placeholder="Building Number" class="form-control">
+
+      <country-list formControlName="work_country" class="form-control" [formGroup]="reactiveForm" ngDefaultControl ></country-list> 
+
     <br>
   
-    <input type="text" ngModel name="work_streetName" placeholder="Work Street Name" class="form-control">
-    <br>
-  
-    <input type="text" ngModel name="work_poBox" placeholder="Work PO Box" class="form-control">
-    <br>
-</div>
-    <button class="btn btn-primary" style="margin: 1%; width: 20%;">Add New Employee</button>
-  </form>
     
+    <input  type="text"  placeholder="Work Province" class="form-control" formControlName="work_province">
+    <br>
+
+    <input  type="text"  placeholder="Work City" class="form-control" formControlName="work_city">
+    <br>
+  
+    
+    <input  type="text"  placeholder="Work Address" class="form-control" formControlName="work_address">
+    <br>
+  
+    <input type="text"  placeholder="Work PO Box" class="form-control" formControlName="work_poBox">
+    <br>
+    <button class="btn btn-primary" [disabled]="reactiveForm.invalid">Add New Employee</button>
+    <form  #deleteForm="ngForm" (ngSubmit)="getRemoveEmployee()">
+      <br>
+      <button class="btn btn-primary" >Remove Employee</button>
+    </form>
+    <form  #updateForm="ngForm" (ngSubmit)="getUpdateEmployee(employeeForm.value)" >
+      <br>
+      <button class="btn btn-primary" [disabled]="reactiveForm.invalid">Update Employee</button>
+    </form>
 </div>
+  </form>
+
+ 
+</div>
+</section>

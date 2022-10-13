@@ -2,13 +2,16 @@ package com.epi.objective04.entity;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
 
 public class tempData {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int Id;
+
+    public int getId() {
+        return Id;
+    }
 
     public String getSurname() {
         return surname;
@@ -45,10 +48,45 @@ public class tempData {
     private String salary;
     private String currency;
     private String dwellingType;
-    private int homeNumber;
-    private String streetName;
     private String poBox;
-    
+
+    private String city;
+    private String province;
+    private String country;
+    private String address;
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getWork_city() {
+        return work_city;
+    }
+
+    public String getWork_province() {
+        return work_province;
+    }
+
+    public String getWork_country() {
+        return work_country;
+    }
+
+    public String getWork_address() {
+        return work_address;
+    }
+
     public String getName() {
         return name;
     }
@@ -65,32 +103,20 @@ public class tempData {
     public String getDwellingType() {
         return dwellingType;
     }
-    public int getHomeNumber() {
-        return homeNumber;
-    }
-    public String getStreetName() {
-        return streetName;
-    }
     public String getPoBox() {
         return poBox;
     }
 
     private String locationType;
-    private int buildingNumber;
-    private String work_streetName;
     private String work_poBox;
-
+    private String work_city;
+    private String work_province;
+    private String work_country;
+    private String work_address;
     public String getLocationType() {
         return locationType;
     }
 
-    public int getBuildingNumber() {
-        return buildingNumber;
-    }
-
-    public String getWork_streetName() {
-        return work_streetName;
-    }
 
     public String getWork_poBox() {
         return work_poBox;

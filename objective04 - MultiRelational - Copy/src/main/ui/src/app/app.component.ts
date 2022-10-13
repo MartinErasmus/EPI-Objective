@@ -1,6 +1,7 @@
 
 import { Component } from '@angular/core';
 import { EmployeeAPIService } from './employee-api.service';
+import { employee } from './entities/employee';
 const headers = { 'Content-Type': 'application/json' };
 @Component({
   selector: 'app-root',
@@ -8,11 +9,9 @@ const headers = { 'Content-Type': 'application/json' };
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ui';
-  postData={
-    "name":"Martin2",
-    "email":"535@gmail.com"
-  }
+  title = 'EPI Employee Form';
+ 
+  
   
   constructor(private employeeAPI: EmployeeAPIService){
 
