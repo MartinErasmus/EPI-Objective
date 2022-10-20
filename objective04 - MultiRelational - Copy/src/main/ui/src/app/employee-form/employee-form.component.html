@@ -5,13 +5,13 @@
   
 <div class="p-3 bg-dark text-white" id="mainSection">
   
-<form [formGroup]="reactiveForm" #employeeForm="ngForm" (ngSubmit)="getEmployeeData(employeeForm.value)">
+<form [formGroup]="reactiveForm" #employeeForm="ngForm" >
   <p class="h2" id="shadowText">Register New Employee</p>
   <div class="form-group" id="topDiv">
     <span 
     *ngIf="reactiveForm.invalid"
     style="color: rgb(253, 82, 82)">Please Ensure All Input Fields are filled in Correctly</span>
-    <form [formGroup]="searchForm" id="searchDiv" #search="ngForm" (ngSubmit)="getSearchEmployee(searchForm.value)">
+    <form [formGroup]="searchForm" id="searchDiv" #search="ngForm" (ngSubmit)="getSearchEmployee()">
       <mat-icon id="searchIcon">search</mat-icon>
       <input (keypress)="keyPressNumbers($event)" minlength="13" maxlength="13" type="text" placeholder="ID" class="form-control" formControlName="id_num">
       <button class="btn btn-primary">Search</button>
@@ -35,7 +35,7 @@
 
  
 
-        <input type="date" min='1900-01-01' max='2005-01-01' class="form-control" formControlName="dob">
+        <input type="date" min='1900-01-01' max='{{this.currentDate}}' class="form-control" formControlName="dob">
         <br>
 
         
@@ -57,13 +57,13 @@
          </ul>
     <br>
     <div class="form-group">
-      <label for="locationType">Residential Dwelling Type</label>
-      <select  id="dwellingType" class="form-control" formControlName="dwellingType" >
-        <option>Apartment</option>
-        <option>Flat</option>
-        <option>Farm</option>
-        <option>House</option>
-        <option>Small Holdings</option>
+      <select  id="dwellingType" class="form-select" formControlName="dwellingType" >
+        <option disabled value="dwellingType" >Residential Dwelling</option>
+        <option value="Apartment">Apartment</option>
+        <option value="Flat">Flat</option>
+        <option value="Farm">Farm</option>
+        <option value="House">House</option>
+        <option value="Small Holdings">Small Holdings</option>
       </select>
     </div>
     <br>
@@ -88,14 +88,15 @@
    
     
     <div class="form-group">
-        <label for="locationType">Location Type</label>
-        <select  id="locationType" class="form-control" formControlName="locationType">
-          <option selected>Office</option>
-          <option>Remote</option>
-          <option>Hybrid</option>
+        <select  class="form-select" formControlName="locationType">
+          <option disabled value="Location Type" >Location Type</option>
+          <option value="Office" >Office</option>
+          <option value="Remote" >Remote</option>
+          <option value="Hybrid" >Hybrid</option>
         </select>
       </div>
       <br>
+      
 
       <country-list [country]="getupdateWorkCountry()" formControlName="work_country" class="form-control" [formGroup]="reactiveForm" ngDefaultControl ></country-list> 
 
@@ -114,14 +115,17 @@
   
     <input type="text"  placeholder="Work PO Box" class="form-control" formControlName="work_poBox">
     <br>
-    <button class="btn btn-primary" [disabled]="reactiveForm.invalid">Add New Employee</button>
+    <button class="btn btn-primary"  (click)="openAddDialog('Add',employeeForm)" [disabled]="reactiveForm.invalid">Add Employee</button>
     <form  #deleteForm="ngForm" >
       <br>
-      <button class="btn btn-primary" (click)="clickDeleteMethod()">Remove Employee</button>
+      <button class="btn btn-primary"  (click)="openDialog('Delete',this.reactiveForm.get('id_number')?.value)" [disabled]="reactiveForm.invalid">Remove Employee</button>
     </form>
-    <form  #updateForm="ngForm" (ngSubmit)="getUpdateEmployee(employeeForm.value)" >
+    <form  #updateForm="ngForm" >
       <br>
-      <button class="btn btn-primary" [disabled]="reactiveForm.invalid">Update Employee</button>
+
+      <button class="btn btn-primary"  (click)="openUpdateDialog('Update',employeeForm.value)" [disabled]="reactiveForm.invalid">Update Employee</button>
+
+      
     </form>
 </div>
   </form>

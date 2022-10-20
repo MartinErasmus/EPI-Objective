@@ -12,6 +12,9 @@ import { CurrencyListComponent } from './currency-list/currency-list.component'
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import {MatDialogModule} from '@angular/material/dialog';
+import { PopUpComponent } from './pop-up/pop-up.component';
+import { ErrorPopUpComponent } from './error-pop-up/error-pop-up.component';
 
 
 
@@ -20,7 +23,9 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
     AppComponent,
     EmployeeFormComponent,
     CountryListComponent,
-    CurrencyListComponent
+    CurrencyListComponent,
+    PopUpComponent,
+    ErrorPopUpComponent,
   ],
 
   imports: [
@@ -32,7 +37,8 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
     MaterialModule,
     MatDatepickerModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDialogModule
     
   ],
   exports:[CountryListComponent],

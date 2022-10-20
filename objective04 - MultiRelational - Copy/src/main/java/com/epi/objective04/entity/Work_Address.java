@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Work_address")
+@Table(name = "work_address")
 public class Work_Address {
     @Id
     //@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "work_id_Sequence")

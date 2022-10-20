@@ -54,8 +54,13 @@ padding-bottom:2% ;
 #topDiv{
     width: 100%;
 }
+
+#searchDiv{
+    position: sticky;
+    left: 100%;
+}
 #searchDiv input{
-        width: 100%;
+        width: 40%;
         margin-right:2px ;
     }
 

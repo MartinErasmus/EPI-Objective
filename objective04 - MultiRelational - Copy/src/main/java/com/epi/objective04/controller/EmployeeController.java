@@ -15,7 +15,6 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
-
     @RequestMapping(value = "createEmployee",method = RequestMethod.POST)
     public String createEmployee(@RequestBody tempData tempdata){
         return employeeService.saveEmployee(tempdata,false);

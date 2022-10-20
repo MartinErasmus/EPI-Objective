@@ -8,13 +8,8 @@ import { CountryListComponent } from '../country-list/country-list.component';
 import { EmployeeAPIService } from '../employee-api.service';
 import { employee } from '../entities/employee';
 import {EmployeeFunctionsService} from '../services/employee-functions.service'
-
-
-
-
-
-
-
+import { MatDialog } from '@angular/material/dialog';
+import { PopUpComponent } from '../pop-up/pop-up.component';
 
 @Component({
   selector: 'employee-form',
@@ -28,7 +23,16 @@ export class EmployeeFormComponent implements OnInit {
   reactiveForm: FormGroup;
   searchForm:FormGroup;
   public Employees: employee[]=[];
-  datepipe: DatePipe = new DatePipe('en-US')
+  datepipe: DatePipe = new DatePipe('en-US');
+  currentDate:any;
+
+
+
+
+  getDate():string{
+    console.log(this.currentDate)
+    return this.currentDate;
+  }
 
   updatedCountry:string;
   getupdateCountry():string{
@@ -77,61 +81,39 @@ export class EmployeeFormComponent implements OnInit {
       return true;
     }
   }
-  constructor(private employeeAPI: EmployeeAPIService) { }
+  constructor(private employeeAPI: EmployeeAPIService, private dailogRef:MatDialog,private employeeFunction:EmployeeFunctionsService) { }
 
-  clickDeleteMethod() {
-    if(confirm("Confirm delete")) {
-      this.getRemoveEmployee();
-    }
-  }
-  clickUpdateMethod() {
-    if(confirm("Confirm delete")) {
-      this.getRemoveEmployee();
-    }
-  }
-
-  clickAddMethod() {
-    if(confirm("Confirm delete")) {
-      this.getRemoveEmployee();
-    }
-  }
-
-
-
-  getUpdateEmployee(data:any){
-    this.Employees.forEach(employee => {
-      if (employee.id_number==this.reactiveForm.get('id_number')?.value) {
-        this.employeeAPI.updateEmployee(data);
-        window.location.reload();
-
+  openDialog(actionName:string,id:string){
+    this.dailogRef.open(PopUpComponent,{
+      data:{
+        name:actionName,
+        Employees: this.Employees,
+        id:id
       }
-    });
-  }
-  getEmployeeData(data:any){
-
-    if(this.reactiveForm.valid==true){
-      this.employeeAPI.saveEmployee(data);
-      window.location.reload();
-    }else{
-      console.log("Please check that all Information is valid")
-    }
+    })
   }
 
-  getRemoveEmployee(){
-    this.Employees.forEach(employee => {
-      if (employee.id_number==this.reactiveForm.get('id_number')?.value) {
-        this.employeeAPI.removeEmployee(parseInt(employee.id));
+  openUpdateDialog(actionName:string,formData:any){
+    this.dailogRef.open(PopUpComponent,{
+      data:{
+        name:actionName,
+        Employees: this.Employees,
+        formData: formData,
       }
-    });
-    window.location.reload();
-
+    })
   }
 
+    openAddDialog(actionName:string,formData:any){
+    this.dailogRef.open(PopUpComponent,{
+      data:{
+        name:actionName,
+        Employees: this.Employees,
+        formData: formData,
+      }
+    })
+  }
 
-
-
-  getSearchEmployee(data:string){
-
+  getSearchEmployee(){
       this.Employees.forEach(employee => {
         if (employee.id_number==this.searchForm.get('id_num')?.value) {
           this.updateCountry(employee.homeAddress_id.country);
@@ -188,10 +170,13 @@ export class EmployeeFormComponent implements OnInit {
 
 
   
-
+  today:Date;
   ngOnInit(): void { 
-
-
+   
+    this.today=new Date();
+    this.today.setFullYear(this.today.getFullYear()-16);
+    this.currentDate=this.datepipe.transform(this.today, 'YYYY-MM-dd');
+    this.getDate();
     this.getEmployees();
     this.searchForm= new FormGroup({
       id_num: new FormControl(null)
@@ -201,25 +186,27 @@ export class EmployeeFormComponent implements OnInit {
       name: new FormControl(null,[Validators.required,Validators.pattern("[a-zA-Z ]*")]),
       surname: new FormControl(null,[Validators.required,Validators.pattern("[a-zA-Z ]*")]),
       email: new FormControl(null,[Validators.email,Validators.required]),
-      dob:new FormControl(null,Validators.required),
-      nationality: new FormControl(null,[Validators.required,Validators.pattern("^[a-zA-Z ]*$")]),
+      dob:new FormControl(null,[Validators.required]),
+      nationality: new FormControl(null,[Validators.required,Validators.pattern("[a-zA-Z ]*")]),
       id_number: new FormControl(null,[Validators.required]),
       position: new FormControl(null,Validators.required),
       salary: new FormControl(null,Validators.required),
       currency: new FormControl(null,Validators.required),
-      dwellingType: new FormControl(null,Validators.required),
+      dwellingType: new FormControl("dwellingType",Validators.required),
       country : new FormControl("Select country ...",Validators.required),
       province: new FormControl(null,Validators.required),
       city: new FormControl(null,Validators.required),
       address: new FormControl(null,Validators.required),
       poBox: new FormControl(null,Validators.required),
-      locationType: new FormControl(null,Validators.required),
+      locationType: new FormControl("Location Type",Validators.required),
       work_country: new FormControl(null,Validators.required),
       work_province: new FormControl(null,Validators.required),
       work_city: new FormControl(null,Validators.required),
       work_address: new FormControl(null,Validators.required),
       work_poBox: new FormControl(null,Validators.required),
     });
+    //this.reactiveForm.controls['locationType'].setValue("Select Location Type");
+
 
    }
 
